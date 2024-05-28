@@ -1,14 +1,17 @@
+import { Provider } from "react-redux";
+import store from "./store/store";
 import Home from "./Layout/Home";
 import Header from "./components/Header";
-/* import Loader from "./components/Loader"; */
+import "simplebar-react/dist/simplebar.min.css";
 
 function App() {
   return (
-    <div className='main movieApp'>
-      <Header />
-      {/* <Loader /> */}
-      <Home />
-    </div>
+    <Provider store={store}>
+      <div className='main movieApp'>
+        <Header />
+        <Home />
+      </div>
+    </Provider>
   );
 }
 

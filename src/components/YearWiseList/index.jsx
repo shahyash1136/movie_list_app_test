@@ -1,7 +1,9 @@
-const YearWiseList = () => {
+/* eslint-disable react/prop-types */
+
+const YearWiseList = ({ year }) => {
   return (
     <div className='list__year'>
-      <span>2012</span>
+      <span>{year}</span>
     </div>
   );
 };

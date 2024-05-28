@@ -1,51 +1,43 @@
-const Card = () => {
+/* eslint-disable react/prop-types */
+import moment from "moment";
+import Ratings from "../Ratings";
+
+const Card = ({
+  poster_path,
+  title,
+  vote_average,
+  release_date,
+  id,
+  clickHandler,
+}) => {
+  const votePer = Math.round(vote_average * 10);
+
   return (
     <div className='card'>
-      <div className='card__container'>
+      <div
+        className='card__container'
+        title={title}
+        style={{ cursor: "pointer" }}
+        onClick={() => clickHandler(id)}>
         <div className='image'>
           <div className='wrapper'>
-            <a
-              className='image'
-              title='Furiosa: A Mad Max Saga'
-              href='/movie/786892'>
+            <div className='image'>
               <img
                 loading='lazy'
                 className='poster'
-                src='https://www.themoviedb.org/t/p/w220_and_h330_face/pKaA8VvfkNfEMUPMiiuL5qSPQYy.jpg'
-                srcSet='https://www.themoviedb.org/t/p/w220_and_h330_face/pKaA8VvfkNfEMUPMiiuL5qSPQYy.jpg 1x, https://www.themoviedb.org/t/p/w440_and_h660_face/pKaA8VvfkNfEMUPMiiuL5qSPQYy.jpg 2x'
-                alt='Furiosa: A Mad Max Saga'
+                src={`https://www.themoviedb.org/t/p/w220_and_h330_face${poster_path}`}
+                srcSet={`https://www.themoviedb.org/t/p/w220_and_h330_face${poster_path} 1x, https://www.themoviedb.org/t/p/w440_and_h660_face${poster_path} 2x`}
+                alt={title}
               />
-            </a>
+            </div>
           </div>
         </div>
         <div className='content'>
-          <div className='consensus tight'>
-            <div className='outer_ring'>
-              <div className='user_score_chart'>
-                <div className='percent'>
-                  <svg viewBox='0 0 36 36' className='circular-chart'>
-                    <path
-                      className='circle-bg'
-                      d='M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831'></path>
-                    <path
-                      className='circle'
-                      strokeDasharray='76, 100'
-                      d='M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831'
-                      stroke='#21d07a'></path>
-                    <text x='18' y='22.35' className='percentage'>
-                      76%
-                    </text>
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-          <h2>
-            <a title='Furiosa: A Mad Max Saga' href='/movie/1930'>
-              Furiosa: A Mad Max Saga
-            </a>
+          <Ratings votePer={votePer} />
+          <h2 className='one-line-clamp' title={title}>
+            {title}
           </h2>
-          <p>May 22, 2024</p>
+          <p>{moment(release_date).format("MMM DD, YYYY")}</p>
         </div>
       </div>
     </div>
