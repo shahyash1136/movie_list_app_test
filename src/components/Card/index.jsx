@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import moment from "moment";
 import Ratings from "../Ratings";
+import posterHolder from "../../assets/images.png";
 
 const Card = ({
   poster_path,
@@ -26,8 +27,11 @@ const Card = ({
                 loading='lazy'
                 className='poster'
                 src={`https://www.themoviedb.org/t/p/w220_and_h330_face${poster_path}`}
-                srcSet={`https://www.themoviedb.org/t/p/w220_and_h330_face${poster_path} 1x, https://www.themoviedb.org/t/p/w440_and_h660_face${poster_path} 2x`}
                 alt={title}
+                onError={(e) => {
+                  e.target.onerror = null; // Prevent infinite loop if placeholder fails
+                  e.target.src = posterHolder;
+                }}
               />
             </div>
           </div>

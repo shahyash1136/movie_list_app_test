@@ -1209,7 +1209,7 @@ _:-ms-fullscreen,
   position: relative;
 }
 .movieDetails__container .poster img {
-  height: calc(100% - 20px);
+  height: calc(200px - 30px);
 }
 .movieDetails__container .poster .image_content.backdrop {
   background-position: 100px 0;
