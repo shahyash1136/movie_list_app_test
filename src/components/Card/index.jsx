@@ -19,7 +19,8 @@ const Card = ({
         className='card__container'
         title={title}
         style={{ cursor: "pointer" }}
-        onClick={() => clickHandler(id)}>
+        onClick={() => clickHandler(id)}
+        data-testid='movieCard'>
         <div className='image'>
           <div className='wrapper'>
             <div className='image'>

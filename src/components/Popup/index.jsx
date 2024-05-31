@@ -11,6 +11,7 @@ import Cast from "./Cast";
 import Title from "./Title";
 import Facts from "./Facts";
 import Description from "./Description";
+import { Suspense } from "react";
 
 const Popup = ({ setShowModal }) => {
   const ref = useOutsideClick(() => {
@@ -47,7 +48,9 @@ const Popup = ({ setShowModal }) => {
               <div className='popup-body'>
                 <div className='movieDetails__container'>
                   <div className='movieDetails__top'>
-                    <Poster {...movieDetails} />
+                    <Suspense fallback={<Loader />}>
+                      <Poster {...movieDetails} />
+                    </Suspense>
                     <Ratings votePer={votePer} />
                   </div>
                   <SimpleBar autoHide={false} className='movieDetails__bottom'>

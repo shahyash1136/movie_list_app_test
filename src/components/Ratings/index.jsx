@@ -23,7 +23,8 @@ const Ratings = ({ votePer }) => {
                 className='circle'
                 strokeDasharray={`${votePer}, 100`}
                 d='M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831'
-                stroke={`${barColor}`}></path>
+                stroke={`${barColor}`}
+                aria-label='circle'></path>
               <text x='18' y='22.35' className='percentage'>
                 {votePer}%
               </text>

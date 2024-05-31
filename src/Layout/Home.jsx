@@ -1,4 +1,10 @@
-import React, { useEffect, useCallback, useRef, useState } from "react";
+import React, {
+  useEffect,
+  useCallback,
+  useRef,
+  useState,
+  Suspense,
+} from "react";
 import { createPortal } from "react-dom";
 import SimpleBar from "simplebar-react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +17,9 @@ import {
 import YearWiseList from "../components/YearWiseList";
 import Loader from "../components/Loader";
 import Card from "../components/Card";
-import Popup from "../components/Popup";
+import CardSkeleton from "../components/Loader/CardSkeleton";
+
+const Popup = React.lazy(() => import("../components/Popup"));
 
 const Home = () => {
   const { isLoading, groupedMovies } = useSelector((state) => state.movies);
@@ -73,18 +81,18 @@ const Home = () => {
       className='movieList'
       autoHide={false}
       scrollableNodeProps={{ ref: listRef, onScroll: handleScroll }}>
-      <div className='main__container'>
+      <div className='main__container' data-testid='movieList'>
         {isLoading && <Loader />}
         {Object.keys(groupedMovies).map((year) => (
           <React.Fragment key={year}>
-            <YearWiseList year={year} />
+            <Suspense fallback={<Loader />}>
+              <YearWiseList year={year} />
+            </Suspense>
             <div className='list__container'>
               {groupedMovies[year].map((movie) => (
-                <Card
-                  key={movie.id}
-                  {...movie}
-                  clickHandler={cardClickHandler}
-                />
+                <Suspense key={movie.id} fallback={<CardSkeleton />}>
+                  <Card {...movie} clickHandler={cardClickHandler} />
+                </Suspense>
               ))}
             </div>
           </React.Fragment>
@@ -92,7 +100,9 @@ const Home = () => {
       </div>
       {showModal &&
         createPortal(
-          <Popup setShowModal={setShowModal} showModal={showModal} />,
+          <Suspense fallback={<Loader />}>
+            <Popup setShowModal={setShowModal} showModal={showModal} />
+          </Suspense>,
           document.body
         )}
     </SimpleBar>

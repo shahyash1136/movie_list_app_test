@@ -10,7 +10,7 @@ const Header = () => {
 
   useEffect(() => {
     dispatch(fetchGenre());
-  }, []);
+  }, [dispatch]);
 
   const genreSelectHandler = (data) => {
     dispatch(setSelectedGenre(data.join(",")));

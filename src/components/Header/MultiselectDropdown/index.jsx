@@ -38,7 +38,7 @@ const MultiSelectDropdown = ({ name, options, loading, onOptionChange }) => {
               <Loader />
             </div>
           ) : (
-            <div className='options'>
+            <div className='options' data-testid='dropdown-menu'>
               {options.map((option, index) => (
                 <label key={index} className='option'>
                   <input
