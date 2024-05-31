@@ -1185,15 +1185,21 @@ _:-ms-fullscreen,
 }
 @media screen and (max-width: 640px) {
   .movieDetails {
-    max-width: 100% !important;
+    max-width: calc(100% - 40px) !important;
   }
 }
 .movieDetails .popup-modal-bg {
   padding: 10px;
-  height: calc(100vh - 150px);
+  height: 795px;
+}
+@media only screen and (min-device-width: 480px) and (max-device-width: 767px) and (orientation: landscape) {
+  .movieDetails .popup-modal-bg {
+    height: calc(100vh - 50px) !important;
+  }
 }
 @media screen and (max-width: 640px) {
   .movieDetails .popup-modal-bg {
+    height: calc(100vh - 200px);
     max-width: 100% !important;
   }
 }
@@ -1228,6 +1234,7 @@ _:-ms-fullscreen,
     -ms-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    background-position: 0px 0;
   }
 }
 .movieDetails__container .poster .background_gradient {
